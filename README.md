@@ -6,7 +6,7 @@
 
 You have to have Boost libraries installed in the system for C++11 or else you might get issue during build process such as:
 
-    >>fatal error: 'boost/lexical_cast.hpp' file not found
+    $ fatal error: 'boost/lexical_cast.hpp' file not found
 
 ### OpenCV
 
