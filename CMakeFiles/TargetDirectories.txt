@@ -1,0 +1,3 @@
+/Users/somdipdey/Downloads/faces/CMakeFiles/rebuild_cache.dir
+/Users/somdipdey/Downloads/faces/CMakeFiles/edit_cache.dir
+/Users/somdipdey/Downloads/faces/CMakeFiles/faces.dir
