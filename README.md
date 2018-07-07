@@ -19,10 +19,9 @@ For MAC OS X
 For Ubuntu
 
     Follow this link: https://www.learnopencv.com/install-opencv3-on-ubuntu/
-
 ### OpenCL
 
-
+For OpenCL installation for your specific system, check online (Google, may be).
 
 ### Boost
 
