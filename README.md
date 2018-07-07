@@ -34,3 +34,26 @@ For MAC OS X
 For Ubuntu
 
     >> sudo apt-get install libboost-all-dev
+
+
+## Installation
+
+    >> git clone https://github.com/somdipdey/Face_Detection_using_OpenCV_and_OpenCL_in_CPlusPlus.git
+    >> mv Face_Detection_using_OpenCV_and_OpenCL_in_CPlusPlus faces
+    >> cd faces
+    >> cmake .
+    >> make
+
+## Utilization
+
+This will automatically detect webcam and start it and additionally write fps to an audit.csv file:
+
+    >> ./faces -a
+
+This will start the face detection on a video instead of camera:
+
+    >> ./faces OUR_VIDEO_PATH
+
+This will open camera with specific id:
+
+    >> ./faces CAMERA_ID
