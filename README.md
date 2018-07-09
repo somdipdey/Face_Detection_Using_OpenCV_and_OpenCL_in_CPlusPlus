@@ -18,7 +18,8 @@ For MAC OS X
 
 For Ubuntu
 
-    Follow this link: https://www.learnopencv.com/install-opencv3-on-ubuntu/
+    Follow this link: https://docs.opencv.org/3.4.0/d7/d9f/tutorial_linux_install.html
+    
 ### OpenCL
 
 For OpenCL installation for your specific system, check online (Google, may be).
