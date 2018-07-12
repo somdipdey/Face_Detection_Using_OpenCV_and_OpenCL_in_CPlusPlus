@@ -9,16 +9,17 @@ You have to have Boost libraries installed in the system for C++11 or else you m
     $ fatal error: 'boost/lexical_cast.hpp' file not found
 
 ### OpenCV
+------
 
 For MAC OS X
 
     >> brew install opencv3
 
-  You could follow this link for more info: [](https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/)
+  You could follow this link for more info: [OpenCV3 for Mac OS](https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/)
 
 For Ubuntu
 
-  Follow this link: [](https://docs.opencv.org/3.4.0/d7/d9f/tutorial_linux_install.html)
+  Follow this link: [OpenCV3 for Ubuntu](https://docs.opencv.org/3.4.0/d7/d9f/tutorial_linux_install.html)
     
 #### Alternatively try the following to install OpenCV3 on Ubuntu:
 
@@ -31,6 +32,7 @@ For Ubuntu
     3.2.x
     
 ### OpenCL
+------
 
 For OpenCL installation for your specific system, check online (Google, may be).
 
@@ -46,6 +48,7 @@ To test if OpenCL is installed on Ubuntu try the following command:
     >> clinfo
 
 ### Boost
+------
 
 To install Boost libraries use the following options as necessary:
 
