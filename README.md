@@ -46,6 +46,8 @@ If you are trying to install OpenCL on Ubuntu ten follow this:
 To test if OpenCL is installed on Ubuntu try the following command:
     
     >> clinfo
+    
+For more info on OpenCL installation, you could also take a look at this [link](https://askubuntu.com/a/850594)
 
 ### Boost
 ------
