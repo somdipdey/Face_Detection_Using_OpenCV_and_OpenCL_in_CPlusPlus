@@ -79,8 +79,13 @@ This will automatically detect webcam and start it and additionally write fps to
 
 This will start the face detection on a video instead of camera:
 
-    >> ./faces OUR_VIDEO_PATH
+    >> ./faces "OUR_VIDEO_PATH"
+
+"OUR_VIDEO_PATH" is a string value, mentioning the path to the video. Example: "/usr/somdipdey/videos/myVideo.avi"
+
 
 This will open camera with specific id:
 
     >> ./faces CAMERA_ID
+    
+CAMERA_ID is an integer value, mentioning the ID of the camera. Example: 0 for attached default webcam.
