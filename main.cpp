@@ -5,7 +5,8 @@
 
 #include <iostream>
 #include <boost/lexical_cast.hpp>
-#include <time.h>
+//#include <time.h> // Commented out for no-use
+#include <ctime>
 #include <string>
 
 // basic file operations
@@ -135,7 +136,7 @@ int executeDetection(const std::string option){
     double num_frames = 1.0;
     
     // Start and end times
-    time_t start, end;
+    //time_t start, end; // Commented out bcz not used
     
     cv::UMat frame; // modified to UMat from Mat to leverage OpenCL
     while ( capture.read(frame) )
@@ -147,7 +148,8 @@ int executeDetection(const std::string option){
         }
         
         // Start time
-        time(&start);
+        //time(&start);
+        int start_clock = clock();
         
         // fetch captured fps of the video
         double fps = capture.get(CV_CAP_PROP_FPS);
@@ -157,26 +159,30 @@ int executeDetection(const std::string option){
         detectAndDisplay( frame );
         
         // End Time
-        time(&end);
+        //time(&end); // Commented out bcz not used
+        int stop_clock = clock();
         
         // Time elapsed
-        double seconds = difftime (end, start);
+        //double seconds = difftime (end, start); // Commented out bcz not used
+        double miliseconds = (stop_clock-start_clock)/double(CLOCKS_PER_SEC)*1000;
         //cout << "Time taken : " << seconds << " seconds" << endl;
         
+        
         // Calculate frames per second
-        double cfps  = num_frames / seconds;
+        double cfps  = num_frames / miliseconds*1000;
         //cout << "Estimated frames per second : " << cfps << endl;
         
         // result/audit output
         std::string auditOut("");
         auditOut += std::to_string(fps) + ",";
-        auditOut += std::to_string(cfps) + "\n";
+        auditOut += std::to_string(cfps);
         
         // write to audit file
         if(writeToAudit == true){
             auditfile.open ("audit.csv", ios::app);
             if (auditfile.is_open()) {
                 /* ok, proceed with output */
+                auditOut += "\n";
                 auditfile << auditOut;
                 auditfile.close();
             }
