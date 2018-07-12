@@ -61,7 +61,7 @@ For Ubuntu
     >> sudo apt-get install libboost-all-dev
 
 
-## Installation
+# Installation
 
     >> git clone https://github.com/somdipdey/Face_Detection_using_OpenCV_and_OpenCL_in_CPlusPlus.git
     >> mv Face_Detection_using_OpenCV_and_OpenCL_in_CPlusPlus faces
@@ -69,7 +69,7 @@ For Ubuntu
     >> cmake .
     >> make
 
-## Utilization
+# Utilization
 
 This will automatically detect webcam and start it and additionally write fps to an audit.csv file:
 
