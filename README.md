@@ -24,6 +24,17 @@ For Ubuntu
 
 For OpenCL installation for your specific system, check online (Google, may be).
 
+If you are trying to install OpenCL on Ubuntu ten follow this:
+
+    >> [sudo] apt install ocl-icd-libopencl1
+    >> [sudo] apt install opencl-headers
+    >> [sudo] apt install clinfo
+    >> [sudo] apt install ocl-icd-opencl-dev
+    
+To test if OpenCL is installed on Ubuntu try the following command:
+    
+    >> clinfo
+
 ### Boost
 
 To install Boost libraries use the following options as necessary:
