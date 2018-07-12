@@ -20,6 +20,11 @@ For Ubuntu
 
     Follow this link: https://docs.opencv.org/3.4.0/d7/d9f/tutorial_linux_install.html
     
+#### Alternatively try the following to install OpenCV3 on Ubuntu:
+
+    >> [sudo] apt-get install opencv-data
+    >> [sudo] apt-get install libopencv-dev
+    
 ### OpenCL
 
 For OpenCL installation for your specific system, check online (Google, may be).
