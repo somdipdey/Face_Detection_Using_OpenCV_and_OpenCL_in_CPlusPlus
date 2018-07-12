@@ -14,11 +14,11 @@ For MAC OS X
 
     >> brew install opencv3
 
-    You could follow this link for more info: https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/
+    You could follow this link for more info: [](https://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/)
 
 For Ubuntu
 
-    Follow this link: https://docs.opencv.org/3.4.0/d7/d9f/tutorial_linux_install.html
+    Follow this link: [](https://docs.opencv.org/3.4.0/d7/d9f/tutorial_linux_install.html)
     
 #### Alternatively try the following to install OpenCV3 on Ubuntu:
 
