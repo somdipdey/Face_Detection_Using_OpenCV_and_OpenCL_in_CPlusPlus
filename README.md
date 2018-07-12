@@ -25,6 +25,11 @@ For Ubuntu
     >> [sudo] apt-get install opencv-data
     >> [sudo] apt-get install libopencv-dev
     
+#### Check if OpenCV3 is installed properly:
+
+    >> pkg-config --modversion opencv
+    3.2.x
+    
 ### OpenCL
 
 For OpenCL installation for your specific system, check online (Google, may be).
