@@ -70,6 +70,14 @@ For Ubuntu
     >> cd faces
     >> cmake .
     >> make
+    
+#### Comments:
+
+1) cmake . (cmake dot) makes the build files in te same directory.
+
+2) Compile the project with the generated makefile: make -jN.
+Set N to the number of simultaneous threads supported on your compilation platform, e.g. make -j8.
+
 
 # Utilization
 
