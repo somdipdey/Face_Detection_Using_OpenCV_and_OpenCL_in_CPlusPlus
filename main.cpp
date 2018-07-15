@@ -9,8 +9,10 @@
 #include <ctime>
 #include <string>
 
+
 // basic file operations
 #include <fstream>
+
 
 // for OpenCL
 //#define CL_USE_DEPRECATED_OPENCL_1_1_APIS
@@ -22,7 +24,7 @@ using namespace cv;
 
 /** Function Headers */
 void detectAndDisplay( cv::UMat frame ); // modified to UMat from Mat to leverage OpenCL
-int executeDetection( const std::string option, std::string fileName = "" );
+int executeDetection( const std::string option, std::string fileName = "", std::string uniqueID = "" );
 int openCLCheck();
 
 /** Global variables */
@@ -60,6 +62,12 @@ int main( int argc, const char* argv[] )
         std::string fileName = argv[2];
         executeDetection(option, fileName);
     }
+    else if(argc == 4){
+        std::string option = argv[1];
+        std::string fileName = argv[2];
+        std::string uniqueID = argv[3];
+        executeDetection(option, fileName, uniqueID);
+    }
     else {
         std::string option = argv[1];
         executeDetection(option);
@@ -70,7 +78,7 @@ int main( int argc, const char* argv[] )
 }
 
 
-int executeDetection(const std::string option, std::string fileName){
+int executeDetection(const std::string option, std::string fileName, std::string uniqueID){
     int camera_device = 0;
     std::string video_path("");
     ofstream auditfile;
@@ -166,6 +174,7 @@ int executeDetection(const std::string option, std::string fileName){
     //time_t start, end; // Commented out bcz not used
     int program_start_clock = clock();
     
+    
     double TOTAL_FPS = 0; // To compute average fps per program
     
     cv::UMat frame; // modified to UMat from Mat to leverage OpenCL
@@ -201,6 +210,7 @@ int executeDetection(const std::string option, std::string fileName){
         
         // Calculate frames per second
         double cfps  = num_frames / miliseconds*1000;
+        TOTAL_FPS += cfps;
         //cout << "Estimated frames per second : " << cfps << endl;
         
         // result/audit output
@@ -235,11 +245,39 @@ int executeDetection(const std::string option, std::string fileName){
             int program_stop_clock = clock();
             double execution_in_ms = (program_stop_clock-program_start_clock)/double(CLOCKS_PER_SEC)*1000;
             cout << "Total execution time (milisecond): " << execution_in_ms << endl;
+            //write out to file -->
+            std::string executionTime("Total execution time (milisecond): ");
+            executionTime += boost::lexical_cast<std::string>(execution_in_ms) + "\n";
+            
             cout << "Total computed fps: " << TOTAL_FPS << endl;
+            //write out to file -->
+            std::string executionFps("Total computed fps: ");
+            executionFps += boost::lexical_cast<std::string>(TOTAL_FPS) + "\n";
+            
             double avg_fps = TOTAL_FPS/execution_in_ms*1000;
-            cout << "Avg. fps computed: " << avg_fps << endl;
+            cout << "Avg. fps computed: " << avg_fps << "\n\n" << endl;
+            //write out to file -->
+            std::string executionAvgFps("Avg. fps computed: ");
+            executionAvgFps += boost::lexical_cast<std::string>(avg_fps) + "\n";
+            
+            //write out to a file -->
+            std::string outFName("./results/");
+            if(uniqueID == "")
+            {
+                outFName += std::to_string(clock()) + ".txt";
+            }
+            else
+            {
+                outFName += uniqueID + ".txt";
+            }
+            ofstream outfile(outFName);
+            std::string filetext("");
+            filetext += executionTime;
+            filetext += executionFps;
+            filetext += executionAvgFps;
+            outfile << filetext;
+            outfile.close();
             break;
-
         }
     }
     
