@@ -22,7 +22,7 @@ using namespace cv;
 
 /** Function Headers */
 void detectAndDisplay( cv::UMat frame ); // modified to UMat from Mat to leverage OpenCL
-int executeDetection( const std::string option );
+int executeDetection( const std::string option, std::string fileName = "" );
 int openCLCheck();
 
 /** Global variables */
@@ -55,33 +55,60 @@ int main( int argc, const char* argv[] )
         std::string option;
         cin >> option;
         executeDetection(option);
-    } else {
+    } else if(argc == 3){
+        std::string option = argv[1];
+        std::string fileName = argv[2];
+        executeDetection(option, fileName);
+    }
+    else {
         std::string option = argv[1];
         executeDetection(option);
     }
     
-
+    
     return 0;
 }
 
 
-int executeDetection(const std::string option){
+int executeDetection(const std::string option, std::string fileName){
     int camera_device = 0;
     std::string video_path("");
     ofstream auditfile;
     bool writeToAudit = false;
     
     if(option == "-a"){
-        // for audit file
-        auditfile.open ("audit.csv", ios::app);
-        writeToAudit = true;
+        if(fileName == "")
+        {
+            // for audit file
+            fileName = "audit.csv";
+            auditfile.open(fileName, ios::app);
+            writeToAudit = true;
+        }
+        else
+        {
+            // for audit file
+            auditfile.open (fileName, ios::app);
+            writeToAudit = true;
+        }
     }
     else if(utility::is_number(option)){
         // specify camera
         camera_device = atoi(option.c_str());
+        if(fileName != "")
+        {
+            // for audit file
+            auditfile.open (fileName, ios::app);
+            writeToAudit = true;
+        }
     }
     else {
         video_path += option;
+        if(fileName != "")
+        {
+            // for audit file
+            auditfile.open (fileName, ios::app);
+            writeToAudit = true;
+        }
     }
     
     //Fetch current path
@@ -137,6 +164,7 @@ int executeDetection(const std::string option){
     
     // Start and end times
     //time_t start, end; // Commented out bcz not used
+    int program_start_clock = clock();
     
     cv::UMat frame; // modified to UMat from Mat to leverage OpenCL
     while ( capture.read(frame) )
@@ -144,6 +172,7 @@ int executeDetection(const std::string option){
         if( frame.empty() )
         {
             cout << "--(!) No captured frame -- Break!\n";
+            program_start_clock = 0;
             break;
         }
         
@@ -179,7 +208,7 @@ int executeDetection(const std::string option){
         
         // write to audit file
         if(writeToAudit == true){
-            auditfile.open ("audit.csv", ios::app);
+            auditfile.open (fileName, ios::app);
             if (auditfile.is_open()) {
                 /* ok, proceed with output */
                 auditOut += "\n";
@@ -201,6 +230,9 @@ int executeDetection(const std::string option){
         
         int c = cvWaitKey(1);
         if (c == 27 || c == 13 || c == 10) {
+            int program_stop_clock = clock();
+            double execution_in_ms = (program_stop_clock-program_start_clock)/double(CLOCKS_PER_SEC)*1000;
+            cout << "Total execution time (milisecond): " << execution_in_ms << endl;
             break;
         }
     }
@@ -243,25 +275,25 @@ void detectAndDisplay( cv::UMat frame ) // modified to UMat from Mat to leverage
 }
 
 /* // Commented this section because MAC OS does not support OpenCL for some reasons
-int openCLCheck(){
-    //get all platforms (drivers)
-    std::vector<cl::Platform> all_platforms;
-    cl::Platform::get(&all_platforms);
-    if(all_platforms.size()==0){
-        std::cout<<" No platforms found. Check OpenCL installation!\n";
-        return -1;
-    }
-    cl::Platform default_platform=all_platforms[0];
-    std::cout << "Using platform: "<< default_platform.getInfo<CL_PLATFORM_NAME>() << "\n";
-    
-    //get default device of the default platform
-    std::vector<cl::Device> all_devices;
-    default_platform.getDevices(CL_DEVICE_TYPE_ALL, &all_devices);
-    if(all_devices.size()==0){
-        std::cout<<" No devices found. Check OpenCL installation!\n";
-        exit(1);
-    }
-    cl::Device default_device=all_devices[0];
-    std::cout<< "Using device: " << default_device.getInfo<CL_DEVICE_NAME>() << "\n";
-}
+ int openCLCheck(){
+ //get all platforms (drivers)
+ std::vector<cl::Platform> all_platforms;
+ cl::Platform::get(&all_platforms);
+ if(all_platforms.size()==0){
+ std::cout<<" No platforms found. Check OpenCL installation!\n";
+ return -1;
+ }
+ cl::Platform default_platform=all_platforms[0];
+ std::cout << "Using platform: "<< default_platform.getInfo<CL_PLATFORM_NAME>() << "\n";
+ 
+ //get default device of the default platform
+ std::vector<cl::Device> all_devices;
+ default_platform.getDevices(CL_DEVICE_TYPE_ALL, &all_devices);
+ if(all_devices.size()==0){
+ std::cout<<" No devices found. Check OpenCL installation!\n";
+ exit(1);
+ }
+ cl::Device default_device=all_devices[0];
+ std::cout<< "Using device: " << default_device.getInfo<CL_DEVICE_NAME>() << "\n";
+ }
  */
