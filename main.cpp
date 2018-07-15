@@ -166,6 +166,8 @@ int executeDetection(const std::string option, std::string fileName){
     //time_t start, end; // Commented out bcz not used
     int program_start_clock = clock();
     
+    double TOTAL_FPS = 0; // To compute average fps per program
+    
     cv::UMat frame; // modified to UMat from Mat to leverage OpenCL
     while ( capture.read(frame) )
     {
@@ -233,7 +235,11 @@ int executeDetection(const std::string option, std::string fileName){
             int program_stop_clock = clock();
             double execution_in_ms = (program_stop_clock-program_start_clock)/double(CLOCKS_PER_SEC)*1000;
             cout << "Total execution time (milisecond): " << execution_in_ms << endl;
+            cout << "Total computed fps: " << TOTAL_FPS << endl;
+            double avg_fps = TOTAL_FPS/execution_in_ms*1000;
+            cout << "Avg. fps computed: " << avg_fps << endl;
             break;
+
         }
     }
     
