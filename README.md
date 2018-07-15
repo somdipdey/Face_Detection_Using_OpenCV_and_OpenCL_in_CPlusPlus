@@ -20,17 +20,17 @@ For MAC OS X
 For Ubuntu
 
   Follow this link: [OpenCV3 for Ubuntu](https://docs.opencv.org/3.4.0/d7/d9f/tutorial_linux_install.html)
-    
+
 #### Alternatively try the following to install OpenCV3 on Ubuntu:
 
     >> [sudo] apt-get install opencv-data
     >> [sudo] apt-get install libopencv-dev
-    
+
 #### Check if OpenCV3 is installed properly:
 
     >> pkg-config --modversion opencv
     3.2.x
-    
+
 ### OpenCL
 ------
 
@@ -42,11 +42,11 @@ If you are trying to install OpenCL on Ubuntu ten follow this:
     >> [sudo] apt install opencl-headers
     >> [sudo] apt install clinfo
     >> [sudo] apt install ocl-icd-opencl-dev
-    
+
 To test if OpenCL is installed on Ubuntu try the following command:
-    
+
     >> clinfo
-    
+
 For more info on OpenCL installation, you could also take a look at this [link](https://askubuntu.com/a/850594).
 
 ### Boost
@@ -70,7 +70,7 @@ For Ubuntu
     >> cd faces
     >> cmake .
     >> make
-    
+
 #### Comments:
 
 1) cmake . (cmake dot) makes the build files in te same directory.
@@ -90,7 +90,7 @@ This will start the face detection on a video instead of camera:
 
     >> ./faces "OUR_VIDEO_PATH"
 
-"OUR_VIDEO_PATH" is a string value, mentioning the path to the video. 
+"OUR_VIDEO_PATH" is a string value, mentioning the path to the video.
 
 Example: **./faces "/usr/somdipdey/videos/myVideo.avi"**
 
@@ -98,7 +98,22 @@ Example: **./faces "/usr/somdipdey/videos/myVideo.avi"**
 This will open camera with specific id:
 
     >> ./faces CAMERA_ID
-    
-CAMERA_ID is an integer value, mentioning the ID of the camera. 
+
+CAMERA_ID is an integer value, mentioning the ID of the camera.
 
 Example: **./faces 0** for attached default webcam.
+
+
+### Using a 3rd argument in the command
+
+You can also specify the name of the audit file as the 3rd argument and all the info related to fps will be written to that audit file.
+
+Example:
+
+    >> ./faces 0 "myAudit.csv"
+
+    In the aforementioned command, audit will be written to myAudit.csv file in the same folder as the program.
+
+    >> ./faces "/usr/somdipdey/videos/myVideo.avi" "auditTest.txt"
+
+    In the aforementioned command, after detecting faces from the specified video, the audit will be written to auditTest.txt file in the same folder as the main program.
