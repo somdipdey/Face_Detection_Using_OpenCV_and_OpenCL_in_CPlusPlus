@@ -112,8 +112,8 @@ Example:
 
     >> ./faces 0 "myAudit.csv"
 
-    In the aforementioned command, audit will be written to myAudit.csv file in the same folder as the program.
+In the aforementioned command, audit will be written to myAudit.csv file in the same folder as the program.
 
     >> ./faces "/usr/somdipdey/videos/myVideo.avi" "auditTest.txt"
 
-    In the aforementioned command, after detecting faces from the specified video, the audit will be written to auditTest.txt file in the same folder as the main program.
+In the aforementioned command, after detecting faces from the specified video, the audit will be written to auditTest.txt file in the same folder as the main program.
