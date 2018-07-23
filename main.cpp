@@ -168,7 +168,7 @@ int executeDetection(const std::string option, std::string fileName, std::string
     }
     
     // Number of frames to capture
-    double num_frames = 1.0;
+    double num_frames = 10.0;
     
     // Start and end times
     //time_t start, end; // Commented out bcz not used
